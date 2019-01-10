@@ -10,8 +10,13 @@ import org.junit.Test;
 import test.pivotal.pal.tracker.support.ApplicationServer;
 import test.pivotal.pal.tracker.support.HttpClient;
 
+import java.io.IOException;
+import java.util.Map;
+
+import static javax.swing.UIManager.put;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
+import static test.pivotal.pal.tracker.support.MapBuilder.envMapBuilder;
 import static test.pivotal.pal.tracker.support.MapBuilder.jsonMapBuilder;
 
 public class FlowTest {
@@ -154,5 +159,20 @@ public class FlowTest {
 
         response = httpClient.get(timesheetsServerUrl("/time-entries?projectId" + createdProjectId));
         assertThat(response.body).isNotNull().isNotEmpty();
+    }
+
+    public void startWithDatabaseName(String dbName) throws IOException, InterruptedException {
+        String dbUrl = "jdbc:mysql://localhost:3306/" + dbName + "?useSSL=false&useTimezone=true&serverTimezone=UTC&useLegacyDatetimeCode=false";
+
+        start(envMapBuilder()
+                .put("SPRING_DATASOURCE_URL", dbUrl)
+                     .put("EUREKA_CLIENT_ENABLED", "false")
+                         .put("RIBBON_EUREKA_ENABLED", "false")
+                         .put("REGISTRATION_SERVER_RIBBON_LISTOFSERVERS", "http://localhost:8883")
+                .build()
+      );
+    }
+
+    private void start(Map<String, String> build) {
     }
 }
