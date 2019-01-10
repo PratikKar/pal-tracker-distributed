@@ -1,6 +1,7 @@
 applications:
 - name: tracker-allocations
   path: ./applications/allocations-server/build/libs/allocations-server.jar
+  - buildpack: dicf_java_buildpack_4_offline_latest
   routes:
   - route: allocations-pal-pratik-kar3001.apps.chicken.pal.pivotal.io
   memory: 1G
