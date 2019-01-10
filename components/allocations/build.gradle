@@ -1,6 +1,7 @@
 dependencies {
     compile project(":components:rest-support")
     compile "org.springframework:spring-jdbc:$springVersion"
-
+    compile "org.springframework.boot:spring-boot-starter-actuator:1.5.9.RELEASE"
+    compile "io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry:1.5.0.RELEASE"
     testCompile project(":components:test-support")
 }
