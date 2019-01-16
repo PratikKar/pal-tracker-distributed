@@ -5,12 +5,8 @@ applications:
   - route: registration-pal-pk3001.apps.pikes.pal.pivotal.io
   memory: 1G
   instances: 1
-  env:
-    GRANT_TYPE: client_credentials
-    SECURITY_USER_NAME: actuator
-    SECURITY_USER_PASSWORD: operations4red
   services:
-  - tracker-backlog-database
-  - tracker-service-registry
-  - tracker-circuit-breaker-dashboard
-  - tracker-sso
+    - tracker-registration-database
+    - tracker-service-registry
+    - tracker-circuit-breaker-dashboard
+    - tracker-sso
